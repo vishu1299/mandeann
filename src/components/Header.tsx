@@ -2,8 +2,14 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Menu, X, ChevronRight, Search } from "lucide-react";
+import { Menu, X, ChevronRight, Search, ChevronDown } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@radix-ui/react-dropdown-menu";
 
 // Category data structure
 const categories = [
@@ -91,6 +97,7 @@ const categories = [
 
 export default function Header() {
   const pathname = usePathname();
+  const [selectedLanguage, setSelectedLanguage] = useState("English");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCategoryMenuOpen, setIsCategoryMenuOpen] = useState(false);
   const [hoveredCategory, setHoveredCategory] = useState<number | null>(null);
@@ -331,24 +338,34 @@ export default function Header() {
               )}
             </button>
 
-            {/* Login and Register Buttons */}
-            <div className="flex items-center space-x-2 ml-2">
-              {/* Login Button */}
-              <Link
-                href="/login"
-                className="bg-[var(--primary)] hover:bg-[var(--primary-hover)] text-white px-6 py-2 rounded-full font-medium text-sm transition-all duration-200 shadow-sm hover:shadow-md"
-              >
-                Login
-              </Link>
+            {/* Language Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="text-gray-300 hover:text-[var(--primary)] font-medium text-[10px] sm:text-xs md:text-sm px-1 sm:px-2 md:px-3 py-1 flex items-center bg-transparent hover:bg-[var(--primary)]/20 rounded transition-colors duration-200 focus:outline-none focus:ring-0">
+                  <span className="hidden md:inline">{selectedLanguage}</span>
+                  <span className="md:hidden">
+                    {selectedLanguage.slice(0, 2).toUpperCase()}
+                  </span>
+                  <ChevronDown className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 ml-0.5 sm:ml-1" />
+                </button>
+              </DropdownMenuTrigger>
 
-              {/* Register Button */}
-              <Link
-                href="/register"
-                className="border border-white text-white hover:bg-white hover:text-[#272727] px-6 py-2 rounded-full font-medium text-sm transition-all duration-200"
-              >
-                Register
-              </Link>
-            </div>
+              <DropdownMenuContent className="bg-white border border-gray-200 shadow-lg rounded-lg min-w-20 sm:min-w-24 focus:outline-none">
+                <DropdownMenuItem
+                  onClick={() => setSelectedLanguage("English")}
+                  className="text-gray-800 hover:bg-[var(--primary)] hover:text-white cursor-pointer transition-colors duration-200 text-xs sm:text-sm p-2"
+                >
+                  English
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  onClick={() => setSelectedLanguage("French")}
+                  className="text-gray-800 hover:bg-[var(--primary)] hover:text-white cursor-pointer transition-colors duration-200 text-xs sm:text-sm p-2"
+                >
+                  French
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>

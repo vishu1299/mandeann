@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Herosearch from "@/components/hero-search";
+import LogoSection from "@/components/logo-section";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -25,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.variable} font-roboto antialiased`}>
+        <LogoSection />
         <Header />
         <Herosearch />
         <main>{children}</main>
