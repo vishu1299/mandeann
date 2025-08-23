@@ -57,12 +57,11 @@ function Herosection() {
   };
 
   const currentImage = images[currentSlide];
-  
 
   return (
     <div className="w-full font-roboto">
       {/* Simple Image Carousel */}
-      <div className="relative max-w-[1440px] h-[400px] sm:h-[500px] lg:h-[600px] overflow-hidden rounded-2xl mx-auto">
+      <div className="relative max-w-[1440px] h-[400px] sm:h-[500px]  overflow-hidden rounded-2xl mx-auto">
         {/* Images */}
         {images.map((image, index) => (
           <div

@@ -3,7 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Herosearch from "@/components/hero-search";
+// import Herosearch from "@/components/hero-search";
 import LogoSection from "@/components/logo-section";
 
 const roboto = Roboto({
@@ -28,8 +28,8 @@ export default function RootLayout({
       <body className={`${roboto.variable} font-roboto antialiased`}>
         <LogoSection />
         <Header />
-        <Herosearch />
-        <main>{children}</main>
+        {/* <Herosearch /> */}
+        <main className="mt-10">{children}</main>
         <Footer />
       </body>
     </html>

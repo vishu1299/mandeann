@@ -2,14 +2,16 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Menu, X, ChevronRight, Search, ChevronDown } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
+  Menu,
+  X,
+  ChevronRight,
+  Search,
+  Heart,
+  ShoppingCart,
+  User,
+} from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 
 // Category data structure
 const categories = [
@@ -97,7 +99,6 @@ const categories = [
 
 export default function Header() {
   const pathname = usePathname();
-  const [selectedLanguage, setSelectedLanguage] = useState("English");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCategoryMenuOpen, setIsCategoryMenuOpen] = useState(false);
   const [hoveredCategory, setHoveredCategory] = useState<number | null>(null);
@@ -338,34 +339,37 @@ export default function Header() {
               )}
             </button>
 
-            {/* Language Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button className="text-gray-300 hover:text-[var(--primary)] font-medium text-[10px] sm:text-xs md:text-sm px-1 sm:px-2 md:px-3 py-1 flex items-center bg-transparent hover:bg-[var(--primary)]/20 rounded transition-colors duration-200 focus:outline-none focus:ring-0">
-                  <span className="hidden md:inline">{selectedLanguage}</span>
-                  <span className="md:hidden">
-                    {selectedLanguage.slice(0, 2).toUpperCase()}
+            {/* Right Side Icons */}
+            <div className="flex items-center gap-1 sm:gap-2 lg:gap-3">
+              <Link href="/account">
+                {/* Wishlist Icon with Badge */}
+                <button className="relative p-1 sm:p-1.5 md:p-2  rounded-full transition-colors duration-200 cursor-pointer">
+                  <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white" />
+                  <span className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 bg-[var(--primary)] text-white text-xs rounded-full w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 flex items-center justify-center font-medium text-[10px] sm:text-xs">
+                    2
                   </span>
-                  <ChevronDown className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 ml-0.5 sm:ml-1" />
                 </button>
-              </DropdownMenuTrigger>
+              </Link>
 
-              <DropdownMenuContent className="bg-white border border-gray-200 shadow-lg rounded-lg min-w-20 sm:min-w-24 focus:outline-none">
-                <DropdownMenuItem
-                  onClick={() => setSelectedLanguage("English")}
-                  className="text-gray-800 hover:bg-[var(--primary)] hover:text-white cursor-pointer transition-colors duration-200 text-xs sm:text-sm p-2"
-                >
-                  English
-                </DropdownMenuItem>
+              {/* Cart Icon with Badge */}
+              <Link href="/cart ">
+                <button className="relative p-1 sm:p-1.5 md:p-2  rounded-full transition-colors duration-200 cursor-pointer">
+                  <ShoppingCart className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white" />
+                  <span className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 bg-[var(--primary)] text-white text-xs rounded-full w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 flex items-center justify-center font-medium text-[10px] sm:text-xs">
+                    3
+                  </span>
+                </button>
+              </Link>
 
-                <DropdownMenuItem
-                  onClick={() => setSelectedLanguage("French")}
-                  className="text-gray-800 hover:bg-[var(--primary)] hover:text-white cursor-pointer transition-colors duration-200 text-xs sm:text-sm p-2"
-                >
-                  French
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+              {/* User Account */}
+              <>
+                <Link href="/account">
+                  <button className="p-1 cursor-pointer sm:p-1.5 md:p-2  rounded-full transition-colors duration-200">
+                    <User className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-white" />
+                  </button>
+                </Link>
+              </>
+            </div>
           </div>
         </div>
       </div>
